@@ -1,7 +1,8 @@
 'use strict';
 
 /*array of objects*/
-Sales.allSales = [];
+Sales.all = [];
+Sales.justViewed = [];
 
 //constructor funtion to generate the information for each picture
 function Sales(name, filepath) {
@@ -9,9 +10,10 @@ function Sales(name, filepath) {
     this.filepath = filepath;
     this.clicks = 0;
     this.displays = 0;
-    Sales.allSales.push(this);
-    console.log(this);
+    Sales.all.push(this);
+    /*console.log(this);*/
 }
+
 
 //function that sends all of the data to the constructor function
 function populate() {
@@ -37,9 +39,49 @@ function populate() {
     new Sales('Wine Glass', 'img/wine-glass.jpg');
 }
 
+
 //function to randomly pic three pictures out of the total, do not have the picture show more than once on the page and do not show any of the pictures from the previous page
+for(var i = 0; i < Sales.allSales.length; i++);
+
+function getThree() {
+    var random = Math.floor(Math.random() * Sales.allSales.length);
+
+}
+
+
+//clear the indication of being shown on the previous pages pictures, indicate the new three pictures as being shown, send all three new pictures to the page, add 1 to each new picture displays values
+
+first.src = 
+second.src =
+third.src = 
+
+
+//functions that run depending on which picture was chosen
+function firstPic () {
+    //adds a value to the clicks for the picture chosen, then sends you to the function to pick three new random pictures
+    getThree();
+}
+
+function secondPic () {
+
+    getThree();
+}
+
+function thirdPic () {
+
+    getThree();
+}
+
 
 //declare an event
 populate();
 
+
 //an event listener for the click
+var first = document.getElementById('left');
+var second = document.getElementById('center');
+var third = document.getElementById('right');
+
+first.addEventListener('click', firstPic);
+second.addEventListener('click', secondPic);
+third.addEventListener('click', thirdPic)

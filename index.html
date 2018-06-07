@@ -4,21 +4,25 @@
             <title>Bus Mall</title>
             <link rel='stylesheet' href='css/reset.css'/>
             <link rel='stylesheet' href='css/style.css'/>
+            <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js'></script>
         </head>
 
         <body>
-            <header></header>
 
-            <main></main>
-            <h1>Click on the product, out of the tree displayed that you would be most likely to purchase. You will be shown 25 screens of random products.</h1>
+            <h1>BusMall Marketing Study</h1>
+            <p>Click on the product, out of the three displayed that you would be most likely to purchase.<br>You will be shown 25 screens of random products.</p>
 
-            <link src = '' id = 'pic1' alt = ''> 
-            <link src = '' id = 'pic2' alt = ''>
-            <link src = '' id = 'pic3' alt = ''>
+            <section id ='image_container'>
+                <link src = '' id = 'left' alt = ''> 
+                <link src = '' id = 'center' alt = ''>
+                <link src = '' id = 'right' alt = ''>
+            </section>
+           
+            <ul id = 'tally'>
+            </ul>
 
             
-
-            <footer></footer>
+            <canvas id='chart'></canvas>
             <script type='text/javascript' src='app.js'></script>
         </body>
     </html>

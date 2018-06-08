@@ -51,6 +51,40 @@ function list() {
     }
 }
 
+//function that displays the chart when finished
+function chart() {
+    var votes = [];
+    var labelNames = [];
+    var colors = ['purple', 'green', 'red', 'blue', 'saddlebrown', 'yellow', 'pink', 'salmon', 'violet', 'navy', 'orange', 'lime', 'turquoise', 'olivedrab', 'maroon', 'khaki', 'gold', 'darkgray', 'yellowgreen', 'indigo'];
+    for(var i = 0; i < sales.length; i++) {
+        votes[i] = sales[i].clicks;
+        labelNames[i] = sales[i].name;
+    }
+    var ctx = document.getElementById('chart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labelNames,
+            datasets: [{
+                label:'# of Votes',
+                data: votes,
+                backgroundColor: colors,
+                borderColor: 'black',
+                borderWidth: 1
+            }]
+        },
+        options:{
+            scales: {
+                yAxes: [{
+                    ticks:{
+                        beginAtZero: true 
+                    }
+                }]
+            }
+        }
+    })
+}
+
 function getRandom() {
     return Math.floor(Math.random() * sales.length);
 }
@@ -96,7 +130,7 @@ function firstPic () {
     if(totalClicks < 25) {
         getThree();
     } else {
-            list();
+            chart();
     }
 }
 function secondPic () {
@@ -105,7 +139,7 @@ function secondPic () {
     if(totalClicks < 25) {
         getThree();
     } else {
-            list();
+            chart();
     }
 }
 function thirdPic () {
@@ -114,7 +148,7 @@ function thirdPic () {
     if(totalClicks < 25) {
         getThree();
     } else {
-            list();
+            chart();
     }
 }
 

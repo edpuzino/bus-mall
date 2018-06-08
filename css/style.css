@@ -1,6 +1,7 @@
 * {
     font-family: gill-sans, sans-serif;
-    width: 100%;  
+    width: 100%;
+    background-color: #fafafa;  
 }
 
 h1 {
@@ -14,6 +15,13 @@ p {
     font-size: 24;
 }
 
+#image-container {
+    height: 450px;
+}
+div {
+    margin: 0px auto 0px auto;
+}
+
 img {
     height: 300px;
     width: 300px;
@@ -21,6 +29,10 @@ img {
     margin: 73px;
     padding: 1px;
     background-color: black;
+}
+
+img:hover {
+    background-color: white;
 }
 
 li {

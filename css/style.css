@@ -22,3 +22,8 @@ img {
     padding: 1px;
     background-color: black;
 }
+
+li {
+    margin: 10px 0px 10px 20px;
+    color: rgb(71, 5, 71)
+}

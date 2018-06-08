@@ -17,7 +17,6 @@ function Sales(name, filepath) {
     sales.push(this);
 }
 
-
 //function that sends all of the data to the constructor function
 function populate() {
     new Sales('Bag', 'img/bag.jpg');
@@ -42,6 +41,15 @@ function populate() {
     new Sales('Wine Glass', 'img/wine-glass.jpg');
 }
 
+//functio that displays the list when finished
+function list() {
+    var ulEl = document.getElementById('tally');
+    for( var i = 0; i < sales.length; i++ ) {
+        var liEl = document.createElement('li');
+        liEl.textContent = sales[i].name + ' received ' + sales[i].clicks + ' votes and was displayed ' + sales[i].displays + ' times.'; 
+        ulEl.appendChild(liEl);     
+    }
+}
 
 function getRandom() {
     return Math.floor(Math.random() * sales.length);
@@ -67,9 +75,7 @@ function getThree() {
     }
     justViewed = currentPics
     display();
-    console.log(totalClicks);
 }
-
 
 //function that displays the pictures to the page
 function display () {
@@ -82,7 +88,6 @@ function display () {
     third.src = sales[justViewed[2]].filepath;
     sales[justViewed[2]].displays +=1;    
 }
-
 
 //functions that run depending on which picture was chosen, adds a click to that picture and gets three new pictures
 function firstPic () {
@@ -113,14 +118,12 @@ function thirdPic () {
     }
 }
 
-
 //declare an event
 function run() {
     populate();
     getThree();
 }
 run();
-
 
 //event listeners for the click
 first.addEventListener('click', firstPic);

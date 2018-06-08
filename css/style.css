@@ -4,11 +4,13 @@
 }
 
 h1 {
+    margin: 15px;
     text-align: center;
     font-size: 36;
 }
 
 p {
+    text-align: center;
     font-size: 24;
 }
 
@@ -16,7 +18,7 @@ img {
     height: 300px;
     width: 300px;
     float: left;
-    margin: 60px;
+    margin: 73px;
     padding: 1px;
     background-color: black;
 }

@@ -41,21 +41,11 @@ function populate() {
     new Sales('Wine Glass', 'img/wine-glass.jpg');
 }
 
-//functio that displays the list when finished
-function list() {
-    var ulEl = document.getElementById('tally');
-    for( var i = 0; i < sales.length; i++ ) {
-        var liEl = document.createElement('li');
-        liEl.textContent = sales[i].name + ' received ' + sales[i].clicks + ' votes and was displayed ' + sales[i].displays + ' times.'; 
-        ulEl.appendChild(liEl);     
-    }
-}
-
 //function that displays the chart when finished
 function chart() {
     var votes = [];
     var labelNames = [];
-    var colors = ['purple', 'green', 'red', 'blue', 'saddlebrown', 'yellow', 'pink', 'salmon', 'violet', 'navy', 'orange', 'lime', 'turquoise', 'olivedrab', 'maroon', 'khaki', 'gold', 'darkgray', 'yellowgreen', 'indigo'];
+    var colors = ['purple', 'salmon', 'red', 'blue', 'saddlebrown', 'yellow', 'pink', 'green', 'violet', 'navy', 'orange', 'lime', 'turquoise', 'olivedrab', 'maroon', 'khaki', 'gold', 'darkgray', 'yellowgreen', 'indigo'];
     for(var i = 0; i < sales.length; i++) {
         votes[i] = sales[i].clicks;
         labelNames[i] = sales[i].name;
@@ -66,7 +56,7 @@ function chart() {
         data: {
             labels: labelNames,
             datasets: [{
-                label:'# of Votes',
+                label:'# of votes for each product',
                 data: votes,
                 backgroundColor: colors,
                 borderColor: 'black',
@@ -84,6 +74,41 @@ function chart() {
         }
     })
 }
+
+//function that displays the percentages chart when finished
+function percentage() {
+    var percent = [];
+    var labelNames = [];
+    var colors = ['purple', 'salmon', 'red', 'blue', 'saddlebrown', 'yellow', 'pink', 'green', 'violet', 'navy', 'orange', 'lime', 'turquoise', 'olivedrab', 'maroon', 'khaki', 'gold', 'darkgray', 'yellowgreen', 'indigo'];
+    for(var i = 0; i < sales.length; i++) {
+        percent[i] = sales[i].clicks / sales[i].displays * 100;
+        labelNames[i] = sales[i].name;
+    }
+    var ctx = document.getElementById('percent').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labelNames,
+            datasets: [{
+                label:'% of times displayed, that the product was clicked on',
+                data: percent,
+                backgroundColor: colors,
+                borderColor: 'black',
+                borderWidth: 1
+            }]
+        },
+        options:{
+            scales: {
+                yAxes: [{
+                    ticks:{
+                        beginAtZero: true 
+                    }
+                }]
+            }
+        }
+    })
+}
+
 
 function getRandom() {
     return Math.floor(Math.random() * sales.length);
@@ -131,6 +156,7 @@ function firstPic () {
         getThree();
     } else {
             chart();
+            percentage();
     }
 }
 function secondPic () {
@@ -140,6 +166,7 @@ function secondPic () {
         getThree();
     } else {
             chart();
+            percentage();
     }
 }
 function thirdPic () {
@@ -149,6 +176,7 @@ function thirdPic () {
         getThree();
     } else {
             chart();
+            percentage();
     }
 }
 

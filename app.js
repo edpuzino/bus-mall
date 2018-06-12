@@ -1,17 +1,6 @@
 'use strict';
 
-//checks to see if the user is a returning customer
-if(localStorage.name) {
-    document.getElementById('testData').innerHTML = 'Welcome back ' + localStorage.name + ', it\'s nice to see you again.'    
-} else {
-    var user = prompt('Hello, welcome to our survey, can we have your name?');
-    localStorage.setItem('name', user);   
-}
-
-
 /*array of objects*/
-var sales = [];
-var justViewed = [];
 var first = document.getElementById('left');
 var second = document.getElementById('center');
 var third = document.getElementById('right');
@@ -141,11 +130,13 @@ function getThree() {
         currentPics[2] = getRandom();
     }
     justViewed = currentPics;
+    var setViewed = JSON.stringify(justViewed);
+    localStorage.setItem('pictures', setViewed);
     display();
 }
 
 //function that displays the pictures to the page
-function display () {
+function display() {
     first.src = sales[justViewed[0]].filepath;
     sales[justViewed[0]].displays +=1;
 
@@ -156,60 +147,71 @@ function display () {
     sales[justViewed[2]].displays +=1;    
 }
 
+//this function runs when the voting is over
+function endSurvey() {
+    chart ();
+    percentage (); 
+    first.removeEventListener('click', firstPic);
+    second.removeEventListener('click', secondPic);
+    third.removeEventListener('click', thirdPic);
+    document.getElementById('testData').innerHTML = 'Thank you ' + localStorage.name + ', for taking our survey, your input is greatly appreciated.';
+    localStorage.clear()
+}
+
 //functions that run depending on which picture was chosen, adds a click to that picture and gets three new pictures
 function firstPic () {
     sales[justViewed[0]].clicks +=1;
+    var setSales = JSON.stringify(sales);
+    localStorage.setItem('numbers', setSales);
     if (localStorage.totalClicks) {
         localStorage.totalClicks = Number(localStorage.totalClicks) + 1;
-        if(Number(localStorage.totalClicks) < 25) {
-            getThree();
+        if(Number(localStorage.totalClicks) >= 25) {
+            endSurvey()
         } else {
-                chart();
-                percentage();
-                localStorage.removeItem('totalClicks');
-                localStorage.removeItem('name');
+            document.getElementById('testData').innerHTML = localStorage.name + ' you have now voted ' + Number(localStorage.totalClicks) + ' times.' 
+            getThree()
         };
     } else {
         localStorage.setItem('totalClicks', '1');
+        document.getElementById('testData').innerHTML = localStorage.name + ' you have now voted 1 time.' 
         getThree();
-    };
-    document.getElementById('testData').innerHTML = localStorage.name + ' you have now voted ' + Number(localStorage.totalClicks) + ' times(s).'    
+    };   
 }
 function secondPic () {
     sales[justViewed[1]].clicks +=1;
+    var setSales = JSON.stringify(sales);
+    localStorage.setItem('numbers', setSales);
     if (localStorage.totalClicks) {
         localStorage.totalClicks = Number(localStorage.totalClicks) + 1;
-        if(Number(localStorage.totalClicks) < 25) {
-            getThree();
+        if(Number(localStorage.totalClicks) >= 25) {
+            endSurvey()
         } else {
-                chart();
-                percentage();
-                localStorage.removeItem('totalClicks');
-                localStorage.removeItem('name');
+            document.getElementById('testData').innerHTML = localStorage.name + ' you have now voted ' + Number(localStorage.totalClicks) + ' times.' 
+            getThree()
         };
     } else {
         localStorage.setItem('totalClicks', '1');
+        document.getElementById('testData').innerHTML = localStorage.name + ' you have now voted 1 time.' 
         getThree();
-    };
-    document.getElementById('testData').innerHTML = localStorage.name + ' you have now voted ' + Number(localStorage.totalClicks) + ' times(s).' ;    
+    };   
 }
 function thirdPic () {
     sales[justViewed[2]].clicks +=1;
+    var setSales = JSON.stringify(sales);
+    localStorage.setItem('numbers', setSales);
     if (localStorage.totalClicks) {
         localStorage.totalClicks = Number(localStorage.totalClicks) + 1;
-        if(Number(localStorage.totalClicks) < 25) {
-            getThree();
+        if(Number(localStorage.totalClicks) >= 25) {
+            endSurvey();
         } else {
-                chart();
-                percentage();
-                localStorage.removeItem('totalClicks');
-                localStorage.removeItem('name');
+            document.getElementById('testData').innerHTML = localStorage.name + ' you have now voted ' + Number(localStorage.totalClicks) + ' times.' 
+            getThree()
         };
     } else {
         localStorage.setItem('totalClicks', '1');
+        document.getElementById('testData').innerHTML = localStorage.name + ' you have now voted 1 time.' 
         getThree();
-    };
-    document.getElementById('testData').innerHTML = localStorage.name + ' you have now voted ' + Number(localStorage.totalClicks) + ' times(s).' ;
+    };   
 }
 
 //declare an event
@@ -217,7 +219,29 @@ function run() {
     populate();
     getThree();
 }
-run();
+
+//checks to see if the user is a returning customer
+if(localStorage.name) {
+    document.getElementById('testData').innerHTML = 'Welcome back ' + localStorage.name + ', it\'s nice to see you again.';
+    var getSales = localStorage.getItem('numbers');
+    var sales = JSON.parse(getSales);
+    var getViewed = localStorage.getItem('pictures');
+    var justViewed = JSON.parse(getViewed);
+    if (localStorage.totalClicks) { 
+        display(); 
+    } else {
+        var sales = [];
+        populate();
+        display(); 
+    }
+  
+} else {
+    var user = prompt('Hello, welcome to our survey, can we have your name?');
+    localStorage.setItem('name', user); 
+    var sales = [];
+    var justViewed = [];
+    run();  
+}
 
 //event listeners for the click
 first.addEventListener('click', firstPic);

@@ -6,6 +6,8 @@ var justViewed = [];
 var first = document.getElementById('left');
 var second = document.getElementById('center');
 var third = document.getElementById('right');
+var sales = [];
+var justViewed = [];
 
 //constructor funtion to generate the information for each picture
 function Sales(name, filepath) {

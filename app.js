@@ -1,6 +1,8 @@
 'use strict';
 
 /*array of objects*/
+var sales = [];
+var justViewed = [];
 var first = document.getElementById('left');
 var second = document.getElementById('center');
 var third = document.getElementById('right');
@@ -179,6 +181,7 @@ function firstPic () {
     getThree();
   }
 }
+
 function secondPic () {
   sales[justViewed[1]].clicks += 1;
   var setSales = JSON.stringify(sales);
@@ -223,6 +226,7 @@ function run() {
 }
 
 //checks to see if the user is a returning customer
+
 if(localStorage.name) {
   document.getElementById('testData').innerHTML = 'Welcome back ' + localStorage.name + ', it\'s nice to see you again.';
   var getSales = localStorage.getItem('numbers');
@@ -232,7 +236,7 @@ if(localStorage.name) {
   if (localStorage.totalClicks) {
     display();
   } else {
-    populate();
+    run();
     display();
   }
 
